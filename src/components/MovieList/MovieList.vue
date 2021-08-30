@@ -7,6 +7,7 @@
       @click="goToDetail(movie.id)"
       class="movie-list_item"
     />
+    <div class="lds-dual-ring"></div>
   </div>
 </template>
 
