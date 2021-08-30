@@ -18,7 +18,8 @@ export type BuildEndpointFunc<P, R> = {
 export type Movie = {
   adult: boolean;
   backdrop_path: string;
-  genre_ids: number[];
+  genre_ids?: number[];
+  genres?: Genre[];
   ud: number;
   original_language: string;
   original_title: string;

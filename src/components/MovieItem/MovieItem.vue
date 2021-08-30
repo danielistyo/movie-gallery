@@ -8,11 +8,7 @@
           <div class="movie__year">{{ $dayjs(movie.release_date, 'YYYY-mm-dd').format('YYYY') }}</div>
         </div>
 
-        <div class="movie__rating">
-          <template v-for="(rs, i) in ratingStars" :key="i">
-            <i :class="rs"></i>
-          </template>
-        </div>
+        <rating-star :value="movie.vote_average" class="movie__rating" />
       </div>
     </transition>
   </div>
@@ -21,8 +17,10 @@
 <script lang="ts">
 import { Movie } from '@/typings';
 import { defineComponent, PropType } from '@vue/runtime-core';
+import RatingStar from '../RatingStar/RatingStar.vue';
 
 export default defineComponent({
+  components: { RatingStar },
   name: 'MovieItem',
   props: {
     movie: {
@@ -34,28 +32,6 @@ export default defineComponent({
     return {
       showDetail: false,
     };
-  },
-  computed: {
-    ratingStars() {
-      const arr = new Array(5);
-      const rating = Math.round(this.movie.vote_average);
-
-      for (let i = 1; i <= arr.length; i++) {
-        const FULL = 'fas fa-star',
-          HALF = 'fas fa-star-half-alt',
-          EMPTY = 'far fa-star';
-        let type: typeof FULL | typeof HALF | typeof EMPTY = EMPTY;
-
-        if (rating >= i * 2) {
-          type = FULL;
-        }
-        if (rating === i * 2 - 1) {
-          type = HALF;
-        }
-        arr[i - 1] = type;
-      }
-      return arr;
-    },
   },
   methods: {
     toggleDetail(isShow: boolean) {
