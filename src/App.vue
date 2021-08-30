@@ -1,5 +1,9 @@
 <template>
   <div class="app">
+    <template v-if="$route.name === 'List'">
+      <img class="app__logo" src="/logo.png" />
+      <div class="app__title">MOVIE GALLERY</div>
+    </template>
     <router-view v-slot="{ Component }">
       <transition>
         <!-- <keep-alive> -->
@@ -38,5 +42,20 @@ html {
 .app {
   max-width: 820px;
   margin: auto;
+
+  &__logo {
+    width: 50px;
+    margin: 10px 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__title {
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: 30px;
+  }
 }
 </style>

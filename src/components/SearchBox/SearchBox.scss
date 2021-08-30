@@ -25,6 +25,10 @@
     margin-right: 5px;
   }
 
+  &__removedate {
+    cursor: pointer;
+  }
+
   &__input {
     padding: 8px;
     flex-grow: 1;
