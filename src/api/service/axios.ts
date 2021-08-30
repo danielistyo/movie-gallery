@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
   params: { api_key: '958e8d6c6c49bcc9e0ae5aab01192167' },
 });
 
-export default (endpoints: Endpoint): Endpoint => {
+export default (endpoints: any): Endpoint => {
   (Object.keys(endpoints) as Array<keyof typeof endpoints>).forEach((key) => {
     endpoints[key] = endpoints[key].bind(axiosInstance);
   });

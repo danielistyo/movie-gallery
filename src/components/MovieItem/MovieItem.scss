@@ -1,0 +1,44 @@
+.movie {
+  overflow: hidden;
+  border: 2px rgba(0, 0, 0, 0) solid;
+  position: relative;
+  cursor: pointer;
+
+  &__poster {
+    object-fit: cover;
+    height: 100%;
+    width: 160px;
+  }
+
+  &__detail {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffffbd;
+  }
+
+  &__title {
+    text-align: center;
+    width: calc(100% - 10px);
+    position: absolute;
+    left: 5px;
+    top: 50px;
+    font-family: 'Lato Bold';
+    text-transform: uppercase;
+  }
+
+  &__year {
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+  &__rating {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
