@@ -26,12 +26,12 @@
     left: 5px;
     top: 50px;
     font-family: 'Lato Bold';
-    text-transform: uppercase;
   }
 
   &__year {
     margin-top: 5px;
     font-size: 12px;
+    text-transform: unset;
   }
 
   &__rating {

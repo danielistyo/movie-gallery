@@ -1,12 +1,12 @@
 <template>
   <div>
-    <search-box :movies="movies" />
-    <movie-list :movies="movies" />
+    <search-box :movies="movies" @filterdate="handleFilterDate" @removefilterdate="handleRemoveFilterDate" />
+    <movie-list :movies="combinedMovies" :skip-loadmore="skipLoadmore" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue';
 import MovieList from '@/components/MovieList';
 import api from '@/api';
 import { Movie } from '@/typings';
@@ -22,8 +22,11 @@ export default defineComponent({
     const movies = ref<Movie[]>([]);
     const page = ref(1);
     const isLoadingMovie = ref(false);
+    const skipLoadmore = ref(false);
 
     const handleScroll = (ev: Event) => {
+      if (skipLoadmore.value) return;
+
       const bodyEl = (ev.target as Document).body;
       if (window.scrollY + window.innerHeight + 30 >= bodyEl.scrollHeight) {
         getMovies();
@@ -57,9 +60,27 @@ export default defineComponent({
 
     getMovies();
 
+    const combinedMovies = ref<Movie[]>([]);
+    watch(movies, (newMovies) => {
+      combinedMovies.value = newMovies;
+    });
+    const handleFilterDate = (filteredMovies: Movie[]) => {
+      skipLoadmore.value = true;
+      combinedMovies.value = filteredMovies;
+    };
+
+    const handleRemoveFilterDate = () => {
+      skipLoadmore.value = false;
+      combinedMovies.value = movies.value;
+    };
+
     return {
+      skipLoadmore,
       movies,
       page,
+      handleFilterDate,
+      handleRemoveFilterDate,
+      combinedMovies,
     };
   },
 });

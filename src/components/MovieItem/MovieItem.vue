@@ -4,8 +4,8 @@
     <transition name="fade">
       <div v-if="showDetail" class="movie__detail">
         <div class="movie__title">
-          {{ movie.title }}
-          <div class="movie__year">{{ $dayjs(movie.release_date, 'YYYY-mm-dd').format('YYYY') }}</div>
+          {{ movie.original_title }}
+          <div class="movie__year">{{ $dayjs(movie.release_date, 'YYYY-mm-dd').format('YYYY MMM DD') }}</div>
         </div>
 
         <rating-star :value="movie.vote_average" class="movie__rating" />

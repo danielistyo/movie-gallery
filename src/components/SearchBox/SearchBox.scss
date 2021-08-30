@@ -2,9 +2,32 @@
   position: relative;
   margin-bottom: 15px;
 
+  &__firstrow {
+    display: flex;
+    align-items: center;
+  }
+
+  &__secondrow {
+    color: #fff;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  &__calendar {
+    color: #fff;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  &__rangedate {
+    color: #fff;
+    margin-right: 5px;
+  }
+
   &__input {
     padding: 8px;
-    width: 820px;
+    flex-grow: 1;
     line-height: 16px;
     height: 32px;
     font-size: 16px;

@@ -7,7 +7,7 @@
       @click="goToDetail(movie.id)"
       class="movie-list_item"
     />
-    <div class="lds-dual-ring"></div>
+    <div v-if="!skipLoadmore" class="lds-dual-ring"></div>
   </div>
 </template>
 
@@ -25,6 +25,10 @@ export default defineComponent({
     movies: {
       type: Array as PropType<Movie[]>,
       default: () => [],
+    },
+    skipLoadmore: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
