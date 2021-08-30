@@ -1,6 +1,6 @@
 <template>
   <div @mouseenter="toggleDetail(true)" @mouseleave="toggleDetail(false)" class="movie">
-    <img :src="$getImage('w200', movie.poster_path)" class="movie__poster" />
+    <img v-lazy="$getImage('w200', movie.poster_path)" class="movie__poster" />
     <transition name="fade">
       <div v-if="showDetail" class="movie__detail">
         <div class="movie__title">

@@ -5,8 +5,15 @@ import store from './store';
 import getImage from '@/helpers/image';
 import dayjs from 'dayjs';
 import '@/assets/scss/main.scss';
+import { Lazyload } from '@vant/lazyload';
 
 const app = createApp(App);
+
+app.use(Lazyload, {
+  preLoad: 1.3,
+  error: require('@/assets/images/error.png'),
+  attempt: 1,
+});
 
 app.config.globalProperties.$getImage = getImage;
 app.config.globalProperties.$dayjs = dayjs;

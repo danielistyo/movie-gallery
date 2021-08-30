@@ -1,8 +1,8 @@
 <template>
   <div class="movie">
     <i class="fas fa-times movie__back" @click="$router.back()"></i>
-    <img v-if="movie" :src="$getImage('w500', movie.poster_path)" class="movie__poster" />
-    <img v-if="movie" :src="$getImage('original', movie.backdrop_path)" class="movie__backdrop" />
+    <img v-if="movie" v-lazy="$getImage('w500', movie.poster_path)" class="movie__poster" />
+    <img v-if="movie" v-lazy="$getImage('original', movie.backdrop_path)" class="movie__backdrop" />
     <div v-if="movie" class="movie__detail">
       <div class="movie__title">{{ movie.title }}</div>
       <div class="movie__subtitle">
