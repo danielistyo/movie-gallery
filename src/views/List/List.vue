@@ -1,5 +1,6 @@
 <template>
   <div>
+    <search-box :movies="movies" />
     <movie-list :movies="movies" />
   </div>
 </template>
@@ -9,11 +10,13 @@ import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
 import MovieList from '@/components/MovieList';
 import api from '@/api';
 import { Movie } from '@/typings';
+import SearchBox from '@/components/SearchBox/SearchBox.vue';
 
 export default defineComponent({
   name: 'List',
   components: {
     MovieList,
+    SearchBox,
   },
   setup() {
     const movies = ref<Movie[]>([]);

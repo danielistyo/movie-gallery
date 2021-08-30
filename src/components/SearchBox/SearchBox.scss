@@ -1,0 +1,48 @@
+.searchbox {
+  position: relative;
+  margin-bottom: 15px;
+
+  &__input {
+    padding: 8px;
+    width: 820px;
+    line-height: 16px;
+    height: 32px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  &__suggestions {
+    position: absolute;
+    z-index: 2;
+    top: 32px;
+    left: 0;
+    right: 0;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+.suggestion {
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: solid #ddd 1px;
+
+  &__poster {
+    height: 80px;
+    width: auto;
+    margin-right: 10px;
+  }
+
+  &__title {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  &__rate {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+}

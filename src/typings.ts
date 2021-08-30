@@ -3,12 +3,13 @@ import { AxiosResponse } from 'axios';
 const MOVIE_ENPOINTS_GET_LIST = 'getList';
 const MOVIE_ENDPOINTS_GET_GENRES = 'getGenres';
 const MOVIE_ENDPOINTS_GET_DETAIL = 'getDetail';
+const MOVIE_ENDPOINTS_SEARCH = 'searchMovie';
 
 export type MovieDiscover = {
   sort_by: 'release_date.desc' | 'popularity.desc';
-  include_adult: boolean;
-  include_video: boolean;
-  page: number;
+  include_adult?: boolean;
+  include_video?: boolean;
+  page?: number;
 };
 
 export type BuildEndpointFunc<P, R> = {
@@ -20,7 +21,7 @@ export type Movie = {
   backdrop_path: string;
   genre_ids?: number[];
   genres?: Genre[];
-  ud: number;
+  id: number;
   original_language: string;
   original_title: string;
   overview: string;
@@ -53,4 +54,7 @@ export type Endpoint = {
   [MOVIE_ENPOINTS_GET_LIST]: (params: MovieDiscover) => Promise<AxiosResponse<ResponseMovieDiscover>>;
   [MOVIE_ENDPOINTS_GET_GENRES]: () => Promise<AxiosResponse<ResponseGenre>>;
   [MOVIE_ENDPOINTS_GET_DETAIL]: (id: number) => Promise<AxiosResponse<ResponseDetailMovie>>;
+  [MOVIE_ENDPOINTS_SEARCH]: (
+    params: MovieDiscover & { query: string },
+  ) => Promise<AxiosResponse<ResponseMovieDiscover>>;
 };

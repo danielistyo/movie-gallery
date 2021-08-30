@@ -11,6 +11,9 @@ const endpoint: Endpoint = {
   getDetail(id) {
     return (this as unknown as AxiosInstance).get(`/movie/${id}`);
   },
+  searchMovie(params) {
+    return (this as unknown as AxiosInstance).get(`search/movie`, { params });
+  },
 };
 
 export default endpoint;
