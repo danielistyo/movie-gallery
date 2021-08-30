@@ -6,7 +6,7 @@ const MOVIE_ENDPOINTS_GET_DETAIL = 'getDetail';
 const MOVIE_ENDPOINTS_SEARCH = 'searchMovie';
 
 export type MovieDiscover = {
-  sort_by: 'release_date.desc' | 'popularity.desc';
+  sort_by?: 'release_date.desc' | 'popularity.desc';
   include_adult?: boolean;
   include_video?: boolean;
   page?: number;

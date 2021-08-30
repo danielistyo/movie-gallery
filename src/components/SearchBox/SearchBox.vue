@@ -1,6 +1,7 @@
 <template>
   <div class="searchbox">
     <input
+      id="inputSearch"
       @input="handleChange"
       @focus="isFocus = true"
       @blur="handleBlur"
@@ -14,10 +15,14 @@
         class="searchbox__suggestion suggestion"
         @click="handleClick(movie.id)"
       >
-        <img :src="$getImage('w200', movie.poster_path)" class="suggestion__poster" />
+        <img v-lazy="$getImage('w200', movie.poster_path)" class="suggestion__poster" />
         <div class="suggestion__detail">
           <div class="suggestion__title">
-            {{ `${movie.title} (${$dayjs(movie.release_date, 'YYYY-mm-dd').format('YYYY')})` }}
+            {{
+              `${movie.original_title} ${
+                movie.release_date ? `(${$dayjs(movie.release_date, 'YYYY-mm-dd').format('YYYY')})` : ''
+              }`
+            }}
           </div>
           <div class="suggestion__rate"><i class="fas fa-star"></i> {{ movie.vote_average }}</div>
         </div>
@@ -55,7 +60,7 @@ export default defineComponent({
       searchedMovies.value = searchedMovies.value.concat(localRes);
 
       // search in server
-      const res = await api.searchMovie({ sort_by: 'popularity.desc', include_adult: false, query: keyword });
+      const res = await api.searchMovie({ include_adult: false, query: keyword });
       if (res.data?.results) {
         const existingIds = searchedMovies.value.map((movie) => movie.id);
         const filteredMovies = res.data?.results.filter((movie) => !existingIds.includes(movie.id));
@@ -71,7 +76,7 @@ export default defineComponent({
     const handleBlur = () => {
       setTimeout(() => {
         isFocus.value = false;
-      }, 500);
+      }, 200);
     };
 
     return { handleChange, searchedMovies, handleClick, isFocus, handleBlur };
