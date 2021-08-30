@@ -5,42 +5,59 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
 import MovieList from '@/components/MovieList';
 import api from '@/api';
 import { Movie } from '@/typings';
-
-type Data = {
-  movies: Movie[];
-};
 
 export default defineComponent({
   name: 'List',
   components: {
     MovieList,
   },
-  data(): Data {
-    return {
-      movies: [],
+  setup() {
+    const movies = ref<Movie[]>([]);
+    const page = ref(1);
+    const isLoadingMovie = ref(false);
+
+    const handleScroll = (ev: Event) => {
+      const bodyEl = (ev.target as Document).body;
+      if (window.scrollY + window.innerHeight + 30 >= bodyEl.scrollHeight) {
+        getMovies();
+      }
     };
-  },
-  created() {
-    this.getMovies();
-  },
-  methods: {
-    async getMovies() {
+
+    onMounted(() => {
+      window.addEventListener('scroll', handleScroll);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll);
+    });
+    const getMovies = async () => {
+      if (isLoadingMovie.value) return;
       try {
+        isLoadingMovie.value = true;
         const res = await api.getList({
           sort_by: 'popularity.desc',
           include_adult: false,
           include_video: false,
-          page: 1,
+          page: page.value,
         });
-        this.movies = res.data.results;
+        page.value += 1;
+        movies.value = movies.value.concat(res.data.results);
+        isLoadingMovie.value = false;
       } catch (error) {
         console.error(error);
       }
-    },
+    };
+
+    getMovies();
+
+    return {
+      movies,
+      page,
+    };
   },
 });
 </script>

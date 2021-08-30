@@ -8,7 +8,7 @@ export type MovieDiscover = {
   sort_by: 'release_date.desc' | 'popularity.desc';
   include_adult: boolean;
   include_video: boolean;
-  page: 1;
+  page: number;
 };
 
 export type BuildEndpointFunc<P, R> = {

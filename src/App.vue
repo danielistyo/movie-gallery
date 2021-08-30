@@ -36,7 +36,7 @@ html {
   background-color: #000;
 }
 .app {
-  max-width: 1000px;
+  max-width: 820px;
   margin: auto;
 }
 </style>
